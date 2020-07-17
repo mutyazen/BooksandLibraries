@@ -18,6 +18,16 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
+    <!-- For Add Css -->
+    <?php
+      if ( isset($site['css']) ){
+        foreach($site['css'] as $css){
+          $exp = explode(",", $css);
+          echo "<link type=\"{$exp[0]}\" rel=\"{$exp[1]}\" href=\"{$exp[2]}\" />";
+        }
+      }
+    ?>
 </head>
 <body>
     <div id="app">
@@ -76,5 +86,13 @@
             @yield('content')
         </main>
     </div>
+
+    <!--- For Add JS -->
+    <?php
+        if ( isset($site['js']) ){
+            foreach($site['js'] as $js)
+              echo "<script src=\"{$js}\"></script>";     
+        }
+    ?>
 </body>
 </html>
