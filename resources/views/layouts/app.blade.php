@@ -7,7 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>Books And Libraries Records</title>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
@@ -15,9 +15,11 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+    <link href="{{url('plugins/font-awesome/css/font-awesome.min.css')}}" rel="stylesheet">
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('plugins/select2/select2.min.css') }}" rel="stylesheet">
 
     <!-- For Add Css -->
     <?php
@@ -60,7 +62,10 @@
                             @endif
                         @else
                             <li class="nav-item">
-                                <a class="nav-link" href="#">List Library</a>
+                                <a class="nav-link" href="{{ route('library') }}">List Library</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('book') }}">List Book</a>
                             </li>
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
@@ -90,6 +95,22 @@
         </main>
     </div>
 
+    <script src="{{ url('js/jquery.min.js') }}"></script> 
+    <script src="{{ url('js/jquery-migrate.min.js') }}"></script> 
+    <script src="{{ url('plugins/jquery-form/jquery.form.min.js') }}"></script>
+    <script src="{{ url('plugins/select2/select2.min.js') }}"></script>
+
+    <script type="text/javascript">
+      $( document ).ready(function() {
+        $.ajaxSetup({
+          headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+          }
+        });
+        console.log($('meta[name="csrf-token"]').attr('content'));
+      });
+    </script>
+
     <!--- For Add JS -->
     <?php
         if ( isset($site['js']) ){
@@ -97,5 +118,10 @@
               echo "<script src=\"{$js}\"></script>";     
         }
     ?>
+
+    <script type="text/javascript">
+      $('.select2').select2();
+    </script>
+
 </body>
 </html>
